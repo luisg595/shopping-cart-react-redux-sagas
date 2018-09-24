@@ -16,9 +16,8 @@ class ProductList extends Component {
 }
 
 const mapStateToProps = state => {
-    const products = state.products.products || []
     return {
-        products: products
+        products: state.products
     }
 }
 

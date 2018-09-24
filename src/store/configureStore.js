@@ -6,10 +6,12 @@ import rootSagas from '../sagas'
 export default function configureStore(initialState) {
     const sagaMiddleware = createSagaMiddleware()
 
+    const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+
     const store = createStore(combineReducers(
-        { cart: reducer.cart, products: reducer.products }), 
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(), 
-        applyMiddleware(sagaMiddleware)
+        { cart: reducer.cart, products: reducer.products }),
+        initialState,
+        composeEnhancers(applyMiddleware(sagaMiddleware))
     )
     
     store.runSaga = sagaMiddleware.run(rootSagas)
